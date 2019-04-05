@@ -1,4 +1,7 @@
-def minSdkVersion = 16
+// bumping minSdkVersion as newer cordova-android fails to build due to versions mismatch
+// if other version is needed it should implemented using build-extras.gradle file
+// see: https://cordova.apache.org/docs/en/latest/guide/platforms/android/#setting-gradle-properties
+def minSdkVersion = 19
 
 if(cdvMinSdkVersion == null) {
     ext.cdvMinSdkVersion = minSdkVersion;
