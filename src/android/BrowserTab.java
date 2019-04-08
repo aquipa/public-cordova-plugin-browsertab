@@ -108,8 +108,16 @@ public class BrowserTab extends CordovaPlugin {
     // Initialize Builder
     CustomTabsIntent.Builder customTabsIntentBuilder = new CustomTabsIntent.Builder();
 
-    // Set tab color
-    String tabColor = cordova.getActivity().getString(cordova.getActivity().getResources().getIdentifier("CUSTOM_TAB_COLOR_RGB", "string", cordova.getActivity().getPackageName()));
+    // Set default fallback tab color
+    String tabColor = "#ffffff";
+
+    // Try to set tab color to plugin variable CUSTOM_TAB_COLOR_RGB value
+    try {
+      tabColor = cordova.getActivity().getString(cordova.getActivity().getResources().getIdentifier("CUSTOM_TAB_COLOR_RGB", "string", cordova.getActivity().getPackageName()));
+    } catch(Exception e) {
+      Log.d(LOG_TAG, "openUrl: failed to retrieve CUSTOM_TAB_COLOR_RGB plugin variable value - default fallback color #ffffff will be used");
+    }
+
     customTabsIntentBuilder.setToolbarColor(colorParser.parseColor(tabColor));
 
     // Create Intent
