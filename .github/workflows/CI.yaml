@@ -13,7 +13,7 @@ jobs:
       matrix:
         node-version: [12.x]
         os: [macos-latest]
-        avd-api-level: [29]
+        avd-api-level: [30]
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -43,6 +43,7 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: ${{ matrix.avd-api-level }}
+        target: google_apis
         force-avd-creation: false
         emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
         disable-animations: false
