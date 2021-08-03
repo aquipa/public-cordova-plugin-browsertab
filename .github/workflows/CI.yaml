@@ -13,7 +13,7 @@ jobs:
       matrix:
         node-version: [12.x]
         os: [macos-latest]
-        api-level: [30]
+        avd-api-level: [29]
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -36,13 +36,13 @@ jobs:
         path: |
           ~/.android/avd/*
           ~/.android/adb*
-        key: avd-${{ matrix.api-level }}
+        key: avd-${{ matrix.avd-api-level }}
 
     - name: create AVD and generate snapshot for caching
       if: steps.avd-cache.outputs.cache-hit != 'true'
       uses: reactivecircus/android-emulator-runner@v2
       with:
-        api-level: ${{ matrix.api-level }}
+        api-level: ${{ matrix.avd-api-level }}
         force-avd-creation: false
         emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
         disable-animations: false
