@@ -26,9 +26,7 @@
         </config-file>
         <source-file src="src/android/BrowserTab.java"
             target-dir="src/com/google/cordova/plugin" />
-        <preference name="ANDROID_SUPPORT_TABS_VERSION" default="26.+"/>
-        <framework src="com.android.support:customtabs:$ANDROID_SUPPORT_TABS_VERSION"/>
-        <framework src="src/android/BrowserTab.gradle" custom="true" type="gradleReference"/>
+        <framework src="androidx.browser:browser:1.3.0+"/>
         <source-file src="src/android/res/browsertab.xml" target-dir="res/values" />
         <!-- this config-file file is for older (<= 6.4.0) cordova-android version (get's ignored in new newer versions) -->
         <config-file target="res/values/browsertab.xml" parent="/*">

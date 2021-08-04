@@ -64,7 +64,7 @@ jobs:
       run: npm install -g cordova@10.0.0
 
     - name: Install cordova paramedic
-      run: npm install -g SwitchCaseGroup/cordova-paramedic#8167426
+      run: npm install -g SwitchCaseGroup/cordova-paramedic#010e409
 
     - name: npm install
       run: |
@@ -78,4 +78,4 @@ jobs:
         force-avd-creation: false
         emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
         disable-animations: false
-        script: cordova-paramedic --platform android@10.0.1 --plugin . --args=--template="github:apache/cordova-app-hello-world#48ccfb9"
+        script: cordova-paramedic --platform android@10.0.1 --plugin .
