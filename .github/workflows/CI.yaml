@@ -69,6 +69,13 @@ jobs:
     - name: npm install
       run: |
         npm i
+
     - name: build android
-      run: |
-        cordova-paramedic --platform android@10.0.1 --plugin . --args=--template="github:apache/cordova-app-hello-world#48ccfb9"
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: ${{ matrix.avd-api-level }}
+        target: google_apis
+        force-avd-creation: false
+        emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+        disable-animations: false
+        script: cordova-paramedic --platform android@10.0.1 --plugin . --args=--template="github:apache/cordova-app-hello-world#48ccfb9"
