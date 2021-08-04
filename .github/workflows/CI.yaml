@@ -64,7 +64,7 @@ jobs:
       run: npm install -g cordova@10.0.0
 
     - name: Install cordova paramedic
-      run: npm install -g SwitchCaseGroup/cordova-paramedic#010e409
+      run: npm install -g SwitchCaseGroup/cordova-paramedic#996951d
 
     - name: npm install
       run: |
