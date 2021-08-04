@@ -71,4 +71,4 @@ jobs:
         npm i
     - name: build android
       run: |
-        cordova-paramedic --platform android@10.0.1 --plugin . --args=--template="github:apache/cordova-app-hello-world#48ccfb9" --target test
+        cordova-paramedic --platform android@10.0.1 --plugin . --args=--template="github:apache/cordova-app-hello-world#48ccfb9" --target emulator-5554
