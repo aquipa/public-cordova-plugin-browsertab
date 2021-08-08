@@ -42,9 +42,57 @@ exports.defineAutoTests = function () {
                 expect(cordova.plugins.browsertab).toBeDefined();
             });
 
-            it('inappbrowser.spec.2 should contain openUrl function', function () {
+            it('browsertab.spec.2 should contain openUrl function', function () {
                 expect(cordova.plugins.browsertab.openUrl).toBeDefined();
                 expect(cordova.plugins.browsertab.openUrl).toEqual(jasmine.any(Function));
+            });
+
+            it('browsertab.spec.3 should contain isAvailable function', function () {
+                expect(cordova.plugins.browsertab.isAvailable).toBeDefined();
+                expect(cordova.plugins.browsertab.isAvailable).toEqual(jasmine.any(Function));
+            });
+        });
+
+
+        describe('openUrl method', function () {
+            if (cordova.platformId === 'osx') {
+                pending('Open method not fully supported on OSX.');
+                return;
+            }
+
+            var originalTimeout;
+            var url = 'https://dist.apache.org/repos/dist/dev/cordova/';
+            var badUrl = 'http://bad-uri/';
+
+            beforeEach(function () {
+                // increase timeout to ensure test url could be loaded within test time
+                originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+                jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
+                iabInstance = null;
+            });
+
+            afterEach(function (done) {
+                // restore original timeout
+                jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+
+                // close
+                cordova.plugins.browsertab.close()
+
+                // add some extra time so that browser dialog is closed
+                setTimeout(done, 2000);
+            });
+
+            it('browsertab.spec.4 should support response from isAvailable callback', function (done) {
+                cordova.plugins.browsertab.isAvailable(function(result) {
+                    // happy path response
+                    expect(result).toBeDefined();
+                    expect(result).toEqual(true);
+                    done();
+                  },
+                  function(isAvailableError) {
+                    done.fail("Error callback has been called");
+                  });
             });
         });
     };
