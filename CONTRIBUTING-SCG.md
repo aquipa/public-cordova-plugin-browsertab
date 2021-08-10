@@ -52,6 +52,10 @@ open -a /Applications/Android\ Studio.app ./platforms/android/
 
 From Android Studio you can run and debug, just like like any standard Android project.
 
+### Notes
+
+- tests reside in the [/tests](/tests) folder. More details can be found at https://github.com/apache/cordova-plugin-test-framework#readme
+
 ## About `cordova-paramedic`
 
 [cordova-paramedic](https://github.com/apache/cordova-paramedic) is a tool to automate execution of Cordova plugins tests (via [cordova-plugin-test-framework](https://github.com/apache/cordova-plugin-test-framework)).
