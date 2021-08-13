@@ -32,11 +32,8 @@ emulator -avd <avd_name> -netdelay none -netspeed full
 With emulator still running, the testing tool `cordova-paramedic` can be run:
 
 ```bash
-cordova-paramedic --platform android@github:apache/cordova-android --plugin .
+cordova-paramedic --platform android@10.1.0 --plugin .
 ```
-
-**Notes:**
-- `--platform` we are explicitly referencing the master branch of `github:apache/cordova-android` because we depend on the patch "[support http w/ content src fix](https://github.com/apache/cordova-android/pull/1298)" which is not in the latest release (currently `10.0.1`).
 
 ---
 ### 4.

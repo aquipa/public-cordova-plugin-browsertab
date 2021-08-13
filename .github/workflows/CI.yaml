@@ -78,4 +78,4 @@ jobs:
         force-avd-creation: false
         emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
         disable-animations: false
-        script: cordova-paramedic --platform android@github:apache/cordova-android --plugin .
+        script: cordova-paramedic --platform android@10.1.0 --plugin .
