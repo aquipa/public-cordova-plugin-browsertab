@@ -27,7 +27,7 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+        key: gradle-001-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
     - name: AVD cache
       uses: actions/cache@v2
@@ -36,7 +36,7 @@ jobs:
         path: |
           ~/.android/avd/*
           ~/.android/adb*
-        key: avd-${{ matrix.avd-api-level }}
+        key: avd-001-${{ matrix.avd-api-level }}
 
     - name: create AVD and generate snapshot for caching
       if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -44,9 +44,11 @@ jobs:
       with:
         api-level: ${{ matrix.avd-api-level }}
         target: google_apis
+        profile: pixel_xl
+        avd-name: test
         force-avd-creation: false
         emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-        disable-animations: false
+        disable-animations: true
         script: echo "Generated AVD snapshot for caching."
 
     - name: Use Node.js ${{ matrix.node-version }}
@@ -75,7 +77,9 @@ jobs:
       with:
         api-level: ${{ matrix.avd-api-level }}
         target: google_apis
+        profile: pixel_xl
+        avd-name: test
         force-avd-creation: false
-        emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-        disable-animations: false
+        emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+        disable-animations: true
         script: cordova-paramedic --platform android@10.1.0 --plugin .
