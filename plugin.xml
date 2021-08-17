@@ -36,6 +36,15 @@
         <config-file target="app/src/main/res/values/browsertab.xml" parent="/resources">
             <string name="CUSTOM_TAB_COLOR_RGB">$CUSTOM_TAB_COLOR_RGB</string>
         </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <queries>
+                <intent>
+                    <action android:name="android.support.customtabs.action.CustomTabsService" />
+                </intent>
+            </queries>
+        </config-file>
+
     </platform>
 
     <platform name="ios">
