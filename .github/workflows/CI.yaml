@@ -2,16 +2,48 @@ name: CI
 
 on: push
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  test_ios:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        os: [macos-latest]
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install cordova
+      run: npm install -g cordova@10.0.0
+
+    - name: Install cordova paramedic
+      run: npm install -g SwitchCaseGroup/cordova-paramedic#996951d
+
+    - name: Install ios-deploy
+      run: npm install -g ios-deploy@1.11.4
+
+    - name: npm install
+      run: |
+        npm i
+
+    - name: test ios with cordova-paramedic
+      run: |
+        cordova-paramedic --platform ios@6.2.0 --plugin .
+
+  test_android:
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
         os: [macos-latest]
         avd-api-level: [30]
 
@@ -72,7 +104,7 @@ jobs:
       run: |
         npm i
 
-    - name: build android
+    - name: test android with cordova-paramedic
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: ${{ matrix.avd-api-level }}
